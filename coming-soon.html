@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Běh s rodiči | Registrace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --color-bg: #fafafa;
+      --color-card: #ffffff;
+      --color-primary: #ef6421;
+      --color-primary-hover: #d25316;
+      --color-primary-light: #fff2eb;
+      --color-secondary: #ffc107;
+      --color-secondary-hover: #ffb300;
+      --color-text-main: #1f2937;
+      --color-text-heading: #111827;
+      --color-text-muted: #6b7280;
+      --color-border: #f3f4f6;
+      --radius-md: 24px;
+      --radius-full: 9999px;
+      --shadow-md: 0 4px 20px -2px rgba(0,0,0,0.05), 0 0 3px rgba(0,0,0,0.02);
+      --shadow-lg: 0 12px 30px -4px rgba(239, 100, 33, 0.15), 0 4px 10px -2px rgba(0,0,0,0.05);
+      --shadow-glow: 0 0 15px rgba(239, 100, 33, 0.3);
+      --font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: radial-gradient(circle at top, #ffffff, var(--color-bg));
+      background-attachment: fixed;
+      color: var(--color-text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1 {
+      color: var(--color-text-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    a:hover {
+      color: var(--color-primary-hover);
+    }
+
+    /* Header */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.5rem 0;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--color-text-heading);
+      text-decoration: none;
+      flex-shrink: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .site-logo span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .site-logo i {
+      color: var(--color-primary);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--color-text-main);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--color-primary);
+    }
+
+    /* Main container */
+    .container {
+      flex: 1;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      width: 100%;
+    }
+
+    /* Card */
+    .card {
+      background: var(--color-card);
+      border-radius: var(--radius-md);
+      padding: 3rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255,255,255, 0.8);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Icon */
+    .coming-soon-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    /* Info box highlight */
+    .info-box {
+      background: var(--color-primary-light);
+      border: 1px solid #ffd4bd;
+      border-radius: var(--radius-md);
+      padding: 2.5rem;
+      margin: 3rem auto;
+      box-shadow: inset 0 2px 10px rgba(255,255,255,0.5);
+    }
+
+    /* Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      font-family: var(--font-family);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), #fb923c);
+      color: white;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-glow);
+      color: white;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: white;
+      border-top: 1px solid var(--color-border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      margin-top: auto;
+    }
+
+    .site-footer p {
+      margin-bottom: 0.5rem;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    .site-footer a {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .header-content {
+        gap: 1rem;
+      }
+
+      .header-nav {
+        gap: 1rem;
+      }
+
+      .card {
+        padding: 2rem;
+      }
+
+      .container {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-content">
+      <a href="/" class="site-logo">
+        <i class="fas fa-shoe-prints" style="font-size: 1.3em; margin-right: 0.4rem;"></i>
+        <span>Běh s rodiči</span>
+      </a>
+      <nav class="header-nav">
+        <a href="/" class="nav-link">Domů</a>
+        <span style="color: var(--color-text-muted); opacity: 0.5;">•</span>
+        <span style="color: var(--color-primary); font-weight: 600;">Registrace</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card" style="max-width: 800px; margin: 2rem auto; text-align: center; padding: 4rem 2rem;">
+      <div class="card-content">
+        <h1 style="color: var(--color-primary); font-size: 3.5rem; margin-bottom: 1.5rem;">
+          Běh s rodiči
+        </h1>
+        
+        <p style="font-size: 1.3rem; color: var(--color-text-main); font-weight: 600; margin-bottom: 2rem;">
+          Registrace už brzy! 🏃‍♂️
+        </p>
+
+        <p style="font-size: 1.15rem; color: var(--color-text-muted); margin-bottom: 2.5rem;">
+          Vzrušující chvíle se blíží! Právě teď připravujeme všechno potřebné, aby vaše registrace na Běh s rodiči proběhla hladce a bez problémů.<br/>
+          <strong style="color: var(--color-primary); display: block; margin-top: 0.8rem;">Sledujte tyto stránky – registrace se spustí 15. dubna!</strong>
+        </p>
+
+        <div style="background: var(--color-primary-light); border: 1px solid #ffd4bd; border-radius: var(--radius-md); padding: 2.5rem; margin: 3rem auto; max-width: 600px; text-align: left; display: flex; flex-direction: column; gap: 1.5rem; box-shadow: inset 0 2px 10px rgba(255,255,255,0.5); line-height: 1.8;">
+          <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
+            <i class="fas fa-calendar" style="color: var(--color-primary); font-size: 1.5rem; width: 1.8rem; text-align: center;"></i>
+            <div><strong style="color: var(--color-text-heading);">Datum běhu:</strong> Čtvrtek 26. dubna 2026</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
+            <i class="fas fa-clock" style="color: var(--color-primary); font-size: 1.5rem; width: 1.8rem; text-align: center;"></i>
+            <div><strong style="color: var(--color-text-heading);">Start:</strong> Od 15:30 před školou</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
+            <i class="fas fa-users" style="color: var(--color-primary); font-size: 1.5rem; width: 1.8rem; text-align: center;"></i>
+            <div><strong style="color: var(--color-text-heading);">Tým:</strong> Dvojice dítě + rodič</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.1rem;">
+            <i class="fas fa-bullseye" style="color: var(--color-primary); font-size: 1.5rem; width: 1.8rem; text-align: center;"></i>
+            <div><strong style="color: var(--color-text-heading);">Obsah:</strong> Běh, úkoly, zábava a cooperation</div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 3rem; margin: 3rem 0; font-size: 1.1rem; flex-wrap: wrap;">
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="margin-bottom: 1rem; color: var(--color-primary); font-size: 2.5rem;">
+              <i class="fas fa-lollipop"></i>
+            </div>
+            <strong style="color: var(--color-text-heading);">Sladká odměna v cíli</strong>
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="margin-bottom: 1rem; color: var(--color-primary); font-size: 2.5rem;">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <strong style="color: var(--color-text-heading);">Zvláštní překvapení pro vítěze</strong>
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="margin-bottom: 1rem; color: var(--color-primary); font-size: 2.5rem;">
+              <i class="fas fa-face-smile"></i>
+            </div>
+            <strong style="color: var(--color-text-heading);">Spoustu smichu a radosti</strong>
+          </div>
+        </div>
+
+        <p style="font-size: 1.25rem; margin-bottom: 3rem; font-weight: 600; color: var(--color-text-main);">
+          Chcete si užít odpoledne plné pohybu a rodinných zážitků?<br/>
+          <span style="color: var(--color-primary);">Vraťte se sem 15. dubna a zaregistrujte svůj tým!</span>
+        </p>
+
+        <a href="/" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">
+          ← Zpět na domů
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>V případě nepříznivého počasí se akce přesouvá.<br>© 2026 ZŠ - Třídy 3.A a 3.B</p>
+    <p style="margin-top: 1rem;"><a href="/admin/login" style="color: var(--color-text-muted); font-size: 0.85rem;">Přihlášení pro pořadatele</a></p>
+  </footer>
+</body>
+</html>
